@@ -818,11 +818,11 @@ h4 {
 }
 
 .bg-banniere {
-    background-image: url("img/panthere_filigrane.webp");
+    background-image: url("img/background_up.webp");
 }
 
 .bg-presentation {
-    background-image: url("img/image-de-presentation.bmp");
+    background-image: url("img/background_down.webp");
 }
 
 @media (max-width: 1024px) {
