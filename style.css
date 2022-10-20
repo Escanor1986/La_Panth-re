@@ -810,19 +810,19 @@ h4 {
 }
 
 .bg-dots-bg {
-    background-image: url("img/dots-bg.webp");
+    background-image: url("./img/dots-bg.webp");
 }
 
 .bg-lines-h2-bg {
-    background-image: url("img/lines-h2-bg.webp");
+    background-image: url("./img/lines-h2-bg.webp");
 }
 
 .bg-banniere {
-    background-image: url("img/background_up.webp");
+    background-image: url("./img/background_up.webp");
 }
 
 .bg-presentation {
-    background-image: url("img/background_down.webp");
+    background-image: url("./img/background_down.webp");
 }
 
 @media (max-width: 1024px) {
