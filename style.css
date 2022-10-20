@@ -739,9 +739,9 @@ h4 {
     margin-top: 24px;
 }
 
-.white,
+.black,
 .list-title {
-    color: #FFFFFF!important;
+    color: #000000!important;
     font-weight: bold;
     font-size: larger;
 }
@@ -836,11 +836,18 @@ h4 {
     width: 100%;
     height: 100%;
 }
+.portfolio-thumb-logo {
+    width: 250px;
+    height: 50px;
+}
 .images-citations {
     width: 100%;
     height: 100%;
 }
-
+.image-resize-mode {
+    width: 100px;
+    height: 100px;
+}
 .keywords {
     color:#cccccc;
     font-size:12px;
