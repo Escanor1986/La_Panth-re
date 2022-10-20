@@ -650,13 +650,14 @@ label,
 .btn,
 a {
     font-family: "helvetica";
-    font-weight: 400;
-    color: #575757!important;
+    font-weight: 500;
+    color: #000000!important;
 }
 li {
     width: 150px;
     height: 50px;
 }
+
 .container {
     max-width: 1000px;
 }
@@ -738,8 +739,11 @@ h4 {
     margin-top: 24px;
 }
 
-.white {
+.white,
+.list-title {
     color: #FFFFFF!important;
+    font-weight: bold;
+    font-size: larger;
 }
 
 .portfolio-thumb {
