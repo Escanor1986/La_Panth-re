@@ -652,6 +652,8 @@ a {
     font-family: "helvetica";
     font-weight: 400;
     color: #575757!important;
+    width: 150px;
+    height: 50px;
 }
 
 .container {
@@ -677,7 +679,7 @@ a {
 }
 
 p {
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .tight-width-whitespace {
@@ -825,6 +827,22 @@ h4 {
     background-image: url("./img/background_down.webp");
 }
 
+.portfolio-thumb {
+    width: 100%;
+    height: 100%;
+}
+.images-citations {
+    width: 100%;
+    height: 100%;
+}
+
+.keywords {
+    color:#cccccc;
+    font-size:12px;
+}
+.keywords-bis {
+    color:#F3976C;
+}
 @media (max-width: 1024px) {
     .bloc {
         padding-left: 20px;
