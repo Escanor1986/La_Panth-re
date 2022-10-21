@@ -10,7 +10,7 @@ RewriteRule ^(.*)index.[A-Za-z]+$ /$1 [R=301,L]
 # BEGIN Cache-Control Headers
 <IfModule mod_headers.c>
 <FilesMatch "\.(webp|css|js|woff)$">
-Header set Cache-Control "max-age=31104000"
+Header set Cache-Control "max-age=31536000"
 </FilesMatch>
 
 # Enleve le cache pour les ressources dynamiques
