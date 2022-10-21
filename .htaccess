@@ -1,12 +1,3 @@
-# Normalisation d'URL
-RewriteEngine on
-
-# /index.xxx → /
-RewriteCond %{REQUEST_URI}^.*/index.[A-Za-z]+
-RewriteRule ^(.*)index.[A-Za-z]+$ /$1 [R=301,L]
-
-# Cache de fichiers
-
 # BEGIN Cache-Control Headers
 <IfModule mod_headers.c>
 <FilesMatch "\.(ico|jpe?g|png|webp|swf|css|gz)$">
