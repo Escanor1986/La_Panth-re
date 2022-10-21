@@ -1,60 +1,75 @@
+# MOD_DEFLATE COMPRESSION
+SetOutputFilter DEFLATE
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript application/x-httpd-php
+#Pour les navigateurs incompatibles
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+#ne pas mettre en cache si ces fichiers le sont d�j�
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
+#les proxies doivent donner le bon contenu
+Header append Vary User-Agent env=!dont-vary
+
+# BEGIN Expire headers
+<IfModule mod_expires.c>
+ ExpiresActive On
+ ExpiresDefault "access plus 7200 seconds"
+ ExpiresByType img/webp "access plus 2592000 seconds"
+ ExpiresByType img/jpg "access plus 2592000 seconds"
+ ExpiresByType img/jpeg "access plus 2592000 seconds"
+ ExpiresByType img/png "access plus 2592000 seconds"
+ ExpiresByType img/gif "access plus 2592000 seconds"
+ AddType img/x-icon .ico
+ ExpiresByType img/ico "access plus 2592000 seconds"
+ ExpiresByType img/icon "access plus 2592000 seconds"
+ ExpiresByType img/x-icon "access plus 2592000 seconds"
+ ExpiresByType /css "access plus 2592000 seconds"
+ ExpiresByType /js "access plus 2592000 seconds"
+ ExpiresByType /html "access plus 7200 seconds"
+ ExpiresByType application/xhtml+xml "access plus 7200 seconds"
+ ExpiresByType application/javascript A259200
+ ExpiresByType application/x-javascript "access plus 2592000 seconds"
+ ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"
+</IfModule>
+# END Expire headers
+
 # BEGIN Cache-Control Headers
 <IfModule mod_headers.c>
-<FilesMatch "\.(ico|jpe?g|png|webp|swf|css|gz)$">
-Header set Cache-Control "max-age=31536000, public"
-</FilesMatch>
-<FilesMatch "\.(js)$">
-Header set Cache-Control "max-age=31536000, private"
-</FilesMatch>
-<filesMatch "\.(html|htm)$">
+ <FilesMatch "\\.(ico|jpe?g|png|webp|swf|gz|ttf)$">
+ Header set Cache-Control "max-age=2592000, public"
+ </FilesMatch>
+ <FilesMatch "\\.(css)$">
+ Header set Cache-Control "max-age=2592000, public"
+ </FilesMatch>
+ <FilesMatch "\\.(js)$">
+ Header set Cache-Control "max-age=2592000, private"
+ </FilesMatch>
+<filesMatch "\\.(html|htm)$">
 Header set Cache-Control "max-age=7200, public"
 </filesMatch>
-# Enleve le cache pour les ressources dynamiques
+# Disable caching for scripts and other dynamic files
 <FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
 Header unset Cache-Control
 </FilesMatch>
 </IfModule>
 # END Cache-Control Headers
 
-# BEGIN Expires Headers
-<IfModule mod_expires.c>
-ExpiresActive On
-ExpiresByType image/webp "access plus 1 year"
-ExpiresByType image/jpg "access plus 1 year"
-ExpiresByType image/jpeg "access plus 1 year"
-ExpiresByType image/gif "access plus 1 year"
-ExpiresByType image/png "access plus 1 year"
-ExpiresByType text/css "access plus 1 month"
-ExpiresByType application/pdf "access plus 1 month"
-ExpiresByType text/x-javascript "access plus 1 month"
-ExpiresByType application/x-shockwave-flash "access plus 1 month"
-ExpiresByType image/x-icon "access plus 1 year"
-ExpiresDefault "access plus 2 days"
-</IfModule>
-# END Expires Headers
+# KILL THEM ETAGS
+Header unset ETag
+FileETag none
 
-# activer gzip
-<IfModule mod_deflate.c>
-SetOutputFilter DEFLATE
+# protect wpconfig.php
+<files wp-config.php>
+order allow,deny
+deny from all
+</files>
 
-BrowserMatch ^Mozilla/4\.0[678] no-gzip
-BrowserMatch ^Mozilla/4 gzip-only-text/html
-BrowserMatch \bMSIE\s(7|8) !no-gzip !gzip-only-text/html
+# protect the htaccess file
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
 
-SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|ico)$ no-gzip dont-vary
-AddOutputFilterByType DEFLATE text/plain
-AddOutputFilterByType DEFLATE text/html
-AddOutputFilterByType DEFLATE text/xml
-AddOutputFilterByType DEFLATE text/css
-AddOutputFilterByType DEFLATE text/js
-AddOutputFilterByType DEFLATE application/xml
-AddOutputFilterByType DEFLATE application/xhtml+xml
-AddOutputFilterByType DEFLATE application/rss+xml
-AddOutputFilterByType DEFLATE application/atom_xml
-AddOutputFilterByType DEFLATE application/javascript
-AddOutputFilterByType DEFLATE application/x-javascript
-AddOutputFilterByType DEFLATE application/x-httpd-php
-AddOutputFilterByType DEFLATE application/x-font-ttf
-AddOutputFilterByType DEFLATE application/x-font-woff
-AddOutputFilterByType DEFLATE application/x-font-opentype
-</IfModule>
+# protection de la lecture des r�pertoires
+Options -Indexes
