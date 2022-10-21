@@ -8,9 +8,25 @@ RewriteCond %{HTTP_HOST} ^www.(.*)$ [NC]
 RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
 # Cache de fichiers
-<FilesMatch "\.(css|js|webp|woff)$">
-Header set Cache-Control "public, max-age=31104000"
+<IfModule mod_headers.c>
+
+<FilesMatch "\\.(ico|webp|png|gif|swf)$">
+Header set Cache-Control "max-age=2592000, public"
 </FilesMatch>
+
+<FilesMatch "\\.(css)$">
+Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+
+<FilesMatch "\\.(js)$">
+Header set Cache-Control "max-age=2592000, private"
+</FilesMatch>
+
+<FilesMatch "\\.(x?html?|php)$">
+Header set Cache-Control "max-age=60000, private, must-revalidate"
+</FilesMatch>
+
+</IfModule>
 
 # Authentification de base (nécessite un fichier .htpasswd)
 <Files /.htaccess>
@@ -25,6 +41,29 @@ Require valid-user
 order allow,deny
 deny from all
 </Files>
+
+## contrôle du cache navigateur - Expire headers
+<IfModule mod_expires.c>
+	ExpiresActive On
+	ExpiresDefault "access plus 7200 seconds"
+    ExpiresByType image/webp 			"access plus 1 year"
+	ExpiresByType image/jpg 			"access plus 1 year"
+	ExpiresByType image/jpeg 			"access plus 1 year"
+	ExpiresByType image/png 			"access plus 1 year"
+	ExpiresByType image/gif 			"access plus 1 year"
+	ExpiresByType image/svg+xml			"access plus 1 year"
+	AddType image/x-icon .ico
+	ExpiresByType image/ico 			"access plus 1 year"
+	ExpiresByType image/icon 			"access plus 1 year"
+	ExpiresByType image/x-icon 			"access plus 1 year"
+	ExpiresByType text/css 				"access plus 1 year"
+	ExpiresByType text/javascript 		"access plus 1 year"
+	ExpiresByType text/html 			"access plus 1 year"
+	ExpiresByType application/xhtml+xml 	"access plus 1 year"
+	ExpiresByType application/javascript 	"access plus 1 year"
+	ExpiresByType application/x-javascript 	"access plus 1 year"
+	ExpiresByType application/x-shockwave-flash "access plus 1 year"
+</IfModule>
 
 # activer gzip
 <IfModule mod_deflate.c>
