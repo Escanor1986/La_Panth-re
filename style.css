@@ -11,7 +11,7 @@ a,
 form-group,
 button {
     transition: all .3s ease-in-out;
-    outline: none!important;
+    /*outline: none!important;*/
 }
 
 a:hover {
@@ -22,6 +22,14 @@ a:hover {
 label, input:hover {
     text-decoration: none;
     cursor: pointer;
+}
+
+label:focus-within{
+    font-weight: bold;
+}
+
+.text-image {
+    padding: 0px 180px;
 }
 
 #page-loading-blocs-notifaction {
@@ -467,7 +475,7 @@ nav .caret {
 }
 
 button {
-    outline: none!important;
+    /*outline: none!important;*/
 }
 
 .btn-rd {
@@ -794,11 +802,13 @@ h4 {
 .btn-atomic-tangerine {
     background: #F3976C;
     color: #FFFFFF!important;
+    font-weight: bold;
 }
 
 .btn-atomic-tangerine:hover {
     background: #c27956!important;
     color: #FFFFFF!important;
+    font-weight: bold;
 }
 
 .ltc-white {
